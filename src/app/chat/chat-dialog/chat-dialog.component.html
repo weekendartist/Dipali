@@ -1,0 +1,22 @@
+<!--
+    * Import the Milligram CSS Framework, or alternatively, import them on "index.html"
+
+     * Use "ngClass" on each message to apply a conditional to|from class
+        > to determine if the message came from the human or the bot
+    * Set up a form with "ngModel" 
+        > sends the message when the enter key is pressed
+-->
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+<link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+<link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+<h1 class="inp">Dipali</h1>
+<ng-container *ngFor="let message of messages | async">
+    <div class="message"[ngClass]="{'from':message.sentBy==='bot','to':message.sentBy==='user'}">
+        {{message.content}}
+    </div>
+</ng-container>
+
+<input class="inp"[(ngModel)] = "formValue"(keyup.enter)="sendMessage()" placeholder="Type your message here..." type="text"/><br>
+<button class="send"(click)="sendMessage()">Send</button>
